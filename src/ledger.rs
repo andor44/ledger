@@ -349,7 +349,7 @@ mod tests {
                     record_type: Chargeback,
                     client: 2,
                     tx: 5,
-                    // Amount on a resolve is ok, it's simply ignored
+                    // Amount on a chargeback is ok, it's simply ignored
                     amount: Some(10.into()),
                 },
                 Ok((2, Transaction::Chargeback { id: 5 })),

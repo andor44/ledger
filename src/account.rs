@@ -124,7 +124,7 @@ impl Account {
                     .find(id)
                     .ok_or(TransactionError::NonexistentTransaction)?;
 
-                // A transaction can only be resolved if it's being disputed.
+                // A transaction can only be chargebacked if it's being disputed.
                 if processed_transaction.state != Disputed {
                     return Err(TransactionError::NotDisputed);
                 }
