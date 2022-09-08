@@ -1,0 +1,10 @@
+[package]
+name = "ledger"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+csv = "1.1"
+rust_decimal = "1.26.1"
+serde = { version = "1.0.144", features = ["std", "derive"] }
+thiserror = "1.0.34"
