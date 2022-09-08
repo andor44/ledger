@@ -32,6 +32,26 @@ An alternative I considered was simply re-scanning the CSV every time a past
 transaction is referenced. This would be more memory efficient, but a lot less
 elegant and complicated for a toy exercise.
 
+## Shortcuts taken
+I took some shortcuts that made writing this small project a bit quicker
+that I'd likely to differently in a real-world scenario. Some examples in
+no particular order:
+* Some of the types (Balance, TXID, etc.) are only type aliases, in real
+  code they'd fare better as newtypes for proper type safety. However,
+  this way I could just type bare integers in many places for simplicity.
+* As mentioned before, account and client are used interchangably.
+* The CSV output is sorted by client ID to make testing the CSV output
+  easier. Otherwise I'd have to sort the output afterwards or make the
+  test independent of the order somehow. This might add some non-trivial
+  overhead on large datasets.
+* Most of the code isn't written with concurrency in mind, although
+  adapting many parts shouldn't be too hard thanks to the architecture.
+  Most importantly the Ledger expects to be initialized from a single
+  reader. Also, all past transactions are stored in a single hashmap
+  that can only be accessed by one thing at a time. However, sharding
+  this on the client ID would be a good approach for making it more
+  concurrency-friendly, for example.
+
 ## Personal preferences
 Code is formatted using `cargo fmt`. I do not necessarily agree with all the
 style choices rustfmt makes but I value consistency over my tastes.
